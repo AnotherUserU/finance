@@ -167,7 +167,7 @@ export default function Dashboard() {
             </div>
 
             <TransactionForm 
-              onSubmit={addTransaction}
+              onSubmit={async (data) => { await addTransaction(data); }}
               onSuccess={() => setShowAddModal(false)}
               onCancel={() => setShowAddModal(false)}
             />
