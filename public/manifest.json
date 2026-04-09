@@ -1,0 +1,16 @@
+{
+  "name": "Finance For Me",
+  "short_name": "FinanceMe",
+  "description": "Premium High-Fidelity Personal Finance Tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/next.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
