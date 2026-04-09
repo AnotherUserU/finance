@@ -24,6 +24,10 @@ export class AuthService {
   }
 
   public onAuthStateChanged(callback: (user: User | null) => void) {
+    if (!this.auth) {
+      console.warn("Auth not initialized. Skipping state change listener.");
+      return () => {};
+    }
     return onAuthStateChanged(this.auth, callback);
   }
 

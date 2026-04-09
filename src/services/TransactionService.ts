@@ -48,6 +48,11 @@ export class TransactionService {
     userId: string, 
     callback: (transactions: Transaction[]) => void
   ) {
+    if (!db) {
+      console.warn("Database not initialized. Skipping subscription.");
+      return () => {};
+    }
+
     const q = query(
       collection(db, this.collectionName),
       where("userId", "==", userId),
