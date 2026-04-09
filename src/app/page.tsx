@@ -12,15 +12,11 @@ import {
   Wallet,
   Loader2,
   X,
-  AreaChart,
-  Area,
-  ResponsiveContainer,
-  Tooltip,
   Receipt
 } from "lucide-react";
 import React, { useState, useMemo } from "react";
 import { TransactionForm } from "@/components/features/TransactionForm";
-import { Area as RechartsArea, AreaChart as RechartsAreaChart, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip, XAxis, YAxis, CartesianGrid } from "recharts";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -117,8 +113,8 @@ export default function Dashboard() {
         
         {chartData.length > 0 ? (
           <div className="h-[300px] w-full">
-            <RechartsResponsiveContainer width="100%" height="100%">
-              <RechartsAreaChart data={chartData}>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData}>
                 <defs>
                   <linearGradient id="colorBalanceDash" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.2}/>
@@ -128,21 +124,21 @@ export default function Dashboard() {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#88888810" />
                 <XAxis dataKey="date" hide />
                 <YAxis hide domain={['auto', 'auto']} />
-                <RechartsTooltip 
+                <Tooltip 
                   contentStyle={{ backgroundColor: "#0f172a", border: "none", borderRadius: "12px", color: "white" }}
-                  formatter={(value: number) => [formatRupiah(value), "Saldo"]}
+                  formatter={(value: any) => [formatRupiah(Number(value) || 0), "Saldo"]}
                 />
-                <RechartsArea 
+                <Area 
                     type="monotone" 
                     dataKey="balance" 
                     stroke="#0ea5e9" 
                     strokeWidth={2}
                     fillOpacity={1} 
                     fill="url(#colorBalanceDash)" 
-                    strokeDasharray={(p: any) => p.isProjected ? "4 4" : "0"}
+                    strokeDasharray="0"
                 />
-              </RechartsAreaChart>
-            </RechartsResponsiveContainer>
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
         ) : (
           <div className="h-[300px] flex flex-col items-center justify-center text-center space-y-4">
