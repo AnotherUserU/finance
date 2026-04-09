@@ -59,19 +59,27 @@ export class TransactionService {
       orderBy("date", "desc")
     );
 
-    return onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
-      const transactions = snapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-          ...data,
-          id: doc.id,
-          date: (data.date as Timestamp).toDate(),
-          createdAt: (data.createdAt as Timestamp).toDate(),
-          updatedAt: (data.updatedAt as Timestamp).toDate(),
-        } as Transaction;
-      });
-      callback(transactions);
-    });
+    return onSnapshot(
+      q, 
+      (snapshot: QuerySnapshot<DocumentData>) => {
+        const transactions = snapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            ...data,
+            id: doc.id,
+            date: (data.date as Timestamp).toDate(),
+            createdAt: (data.createdAt as Timestamp).toDate(),
+            updatedAt: (data.updatedAt as Timestamp).toDate(),
+          } as Transaction;
+        });
+        callback(transactions);
+      },
+      (error) => {
+        console.error("Firestore Error in subscribeToTransactions:", error.message);
+        // Fallback to empty array so the app stops loading
+        callback([]);
+      }
+    );
   }
 
   /**
