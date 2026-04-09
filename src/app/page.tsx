@@ -18,7 +18,7 @@ import React, { useState, useMemo } from "react";
 import { TransactionForm } from "@/components/features/TransactionForm";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 
-export default function Dashboard() {
+export default function Page() {
   const { user } = useAuth();
   const { stats, loading, addTransaction, transactions } = useTransactions();
   const [showAddModal, setShowAddModal] = useState(false);
