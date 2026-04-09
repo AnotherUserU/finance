@@ -80,7 +80,7 @@ export class TransactionService {
    * Update an existing transaction
    */
   public async updateTransaction(id: string, data: Partial<Transaction>): Promise<void> {
-    const updateData = {
+    const updateData: any = {
       ...data,
       updatedAt: Timestamp.now(),
     };
