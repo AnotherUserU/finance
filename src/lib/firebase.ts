@@ -13,9 +13,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase for Client-side
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+const isConfigured = !!firebaseConfig.apiKey;
+
+const app = (getApps().length === 0 && isConfigured) 
+  ? initializeApp(firebaseConfig) 
+  : (getApps().length > 0 ? getApp() : null);
+
+const auth = app ? getAuth(app) : null as any;
+const db = app ? getFirestore(app) : null as any;
+const storage = app ? getStorage(app) : null as any;
 
 export { app, auth, db, storage };
