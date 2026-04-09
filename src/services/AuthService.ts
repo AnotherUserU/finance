@@ -1,7 +1,7 @@
 import { 
   Auth, 
   onAuthStateChanged, 
-  signInWithPopup, 
+  signInWithRedirect, 
   GoogleAuthProvider, 
   signOut, 
   User 
@@ -31,11 +31,10 @@ export class AuthService {
     return onAuthStateChanged(this.auth, callback);
   }
 
-  public async signInWithGoogle(): Promise<User> {
+  public async signInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(this.auth, provider);
-      return result.user;
+      await signInWithRedirect(this.auth, provider);
     } catch (error) {
       console.error("Error signing in with Google:", error);
       throw error;
