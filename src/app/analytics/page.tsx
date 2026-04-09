@@ -129,7 +129,7 @@ export default function AnalyticsPage() {
                 </Pie>
                 <Tooltip 
                     contentStyle={{ backgroundColor: "#0f172a", border: "none", borderRadius: "12px", color: "white" }}
-                    formatter={(value: number) => formatRupiah(value)}
+                    formatter={(value: any) => formatRupiah(Number(value) || 0)}
                 />
               </PieChart>
             </ResponsiveContainer>
